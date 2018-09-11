@@ -90,12 +90,7 @@ class Logo extends Component {
           <Animated.Image
             resizeMode="contain"
             style={[StyleSheet.absoluteFill, containerImageStyles]}
-            source={require('./images/background.png')}
-          />
-          <Animated.Image
-            resizeMode="contain"
-            style={imageStyles}
-            source={require('./images/logo.png')}
+            source={require('./images/panda.png')}
           />
         </Animated.View>
         <Text style={styles.text}>看你还皮不皮</Text>
