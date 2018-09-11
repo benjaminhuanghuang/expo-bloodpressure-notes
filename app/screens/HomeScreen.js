@@ -83,7 +83,6 @@ class HomeScreen extends Component {
         <SubmitButton enabled={this.state.isFormValid} onPress={this.handleSubmit} text="保存" />
 
         <ListView
-          style={styles.container}
           dataSource={this.state.records}
           renderRow={(data) => <ListViewRow data={data} />}
           renderSeparator={Separator}
