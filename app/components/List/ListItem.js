@@ -4,18 +4,9 @@ import { View, Text, TouchableHighlight } from 'react-native';
 
 import styles from './styles';
 
-const ListItem = ({
-  record,
-  onPress,
-  checkmark = true,
-  selected = false,
-  visible = true,
-  customIcon = null,
-  iconBackground,
-}) => {
-
-  console.log("record", record);
-  return (
+const ListItem = ({record}) => {
+  console.log(record);
+   return (
     <View style={styles.row} key={record.dateTime}>
       <Text style={styles.text}>{record.lowPressure}</Text>
       <Text style={styles.text}>{record.highPressure}</Text>

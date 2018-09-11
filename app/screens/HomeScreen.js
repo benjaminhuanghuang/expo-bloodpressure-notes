@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { FlatList, StatusBar, View, KeyboardAvoidingView } from 'react-native';
+import { FlatList, StatusBar, ListView, ScrollView, View, KeyboardAvoidingView } from 'react-native';
 //
 import Container from '../components/Container';
 import BloodPressureInput from '../components/BloodPressureInput';
 import { Header } from '../components/Header';
 import { Logo } from '../components/Logo';
 import SubmitButton from '../components/SubmitButton';
-import { ListItem, Separator } from '../components/List';
+import { ListItem, Separator, ListViewHeader, ListViewRow } from '../components/List';
 
 class HomeScreen extends Component {
   state = {
@@ -14,13 +14,13 @@ class HomeScreen extends Component {
     highPressure: '',
     records: [
       {
-        lowPressure:60,
-        highPressure:120,
+        lowPressure: 60,
+        highPressure: 120,
         dateTime: '11111'
       },
       {
-        lowPressure:70,
-        highPressure:150,
+        lowPressure: 70,
+        highPressure: 150,
         dateTime: '11111'
       }
     ],
@@ -81,16 +81,14 @@ class HomeScreen extends Component {
           onChangeText={this.getHandler('highPressure')}
         />
         <SubmitButton enabled={this.state.isFormValid} onPress={this.handleSubmit} text="保存" />
-        <View style={{ height: 200, alignSelf: "flex-end" }}>
-          {/* <FlatList
-            data={this.state.records}
-            renderItem={({ record }) => (
-              <ListItem record={record} key={record.dateTime}/>
-            )}
-            // keyExtractor={item => item}
-            // ItemSeparatorComponent={Separator}
-          /> */}
-        </View>
+
+        <ListView
+          style={styles.container}
+          dataSource={this.state.records}
+          renderRow={(data) => <ListViewRow data={data} />}
+          renderSeparator={Separator}
+          renderHeader={<ListViewHeader headers={['时间', '低压', '高压' ]}/>}
+        />
       </Container>
     );
   }

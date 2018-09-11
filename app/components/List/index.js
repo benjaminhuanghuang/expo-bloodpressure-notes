@@ -3,5 +3,5 @@ import styles from './styles';
 import Separator from './Separator';
 
 export {
-  ListItem, styles, Separator,
+  ListItem, styles, Separator, ListViewHeader
 };
