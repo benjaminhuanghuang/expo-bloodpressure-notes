@@ -15,19 +15,19 @@ EStyleSheet.build({
   $primaryPurple: '#9E768F',
 
   $white: '#FFFFFF',
-  $lightGray: '#F0F0F0',
+  $lightGray: '#F0F0F0', 
   $border: '#979797',
   $inputText: '#797979',
   $darkText: '#343434',
 });
 
 //
-import ChartScreen from "./screens/ChartScreen";
+import HomeScreen from "./screens/HomeScreen";
 import HistoryScreen from "./screens/HistoryScreen";
-import InputScreen from "./screens/InputScreen";
+import ChartScreen from "./screens/ChartScreen";
 
 const AppNavigator = createBottomTabNavigator({
-    Home: InputScreen,
+    Home: HomeScreen,
     History: HistoryScreen,
     Chart: ChartScreen,
 }, {
