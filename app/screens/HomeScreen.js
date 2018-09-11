@@ -12,7 +12,18 @@ class HomeScreen extends Component {
   state = {
     lowPressure: '',
     highPressure: '',
-    records: [],
+    records: [
+      {
+        lowPressure:60,
+        highPressure:120,
+        dateTime: '11111'
+      },
+      {
+        lowPressure:70,
+        highPressure:150,
+        dateTime: '11111'
+      }
+    ],
     isFormValid: false,
   }
 
@@ -39,8 +50,6 @@ class HomeScreen extends Component {
   };
 
   validateForm = () => {
-    console.log("lowPressure", this.state.lowPressure, +this.state.lowPressure >= 0);
-    console.log("highPressure", this.state.highPressure, +this.state.highPressure >= 0);
     if (
       +this.state.lowPressure > 0 && +this.state.highPressure > 0
     ) {
@@ -72,15 +81,15 @@ class HomeScreen extends Component {
           onChangeText={this.getHandler('highPressure')}
         />
         <SubmitButton enabled={this.state.isFormValid} onPress={this.handleSubmit} text="保存" />
-        <View style={{ height: 100, alignSelf: "flex-end" }}>
-          <FlatList
+        <View style={{ height: 200, alignSelf: "flex-end" }}>
+          {/* <FlatList
             data={this.state.records}
             renderItem={({ record }) => (
-              <ListItem data={record} />
+              <ListItem record={record} key={record.dateTime}/>
             )}
-            keyExtractor={item => item}
-            ItemSeparatorComponent={Separator}
-          />
+            // keyExtractor={item => item}
+            // ItemSeparatorComponent={Separator}
+          /> */}
         </View>
       </Container>
     );

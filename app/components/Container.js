@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View } from 'react-native';
+import { StatusBar } from 'react-native';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -10,6 +11,12 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '$primaryBlue',
+    '@media ios': {
+      paddingTop: 20,
+    },
+    '@media android': {
+      paddingTop: StatusBar.currentHeight,
+    },
   },
 });
 

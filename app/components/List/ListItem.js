@@ -5,20 +5,24 @@ import { View, Text, TouchableHighlight } from 'react-native';
 import styles from './styles';
 
 const ListItem = ({
-  text,
+  record,
   onPress,
   checkmark = true,
   selected = false,
   visible = true,
   customIcon = null,
   iconBackground,
-}) => (
-    <TouchableHighlight onPress={onPress} underlayColor={styles.$underlayColor}>
-      <View style={styles.row}>
-        <Text style={styles.text}>{text}</Text>
-        </View>
-    </TouchableHighlight>
+}) => {
+
+  console.log("record", record);
+  return (
+    <View style={styles.row} key={record.dateTime}>
+      <Text style={styles.text}>{record.lowPressure}</Text>
+      <Text style={styles.text}>{record.highPressure}</Text>
+      {/* <Text style={styles.text}>{record.dateTime}</Text> */}
+    </View>
   );
+}
 
 ListItem.propTypes = {
   text: PropTypes.string,
