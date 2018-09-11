@@ -7,9 +7,12 @@ export default EStyleSheet.create({
   $smallContainerSize: imageWidth / 2,
   $smallImageSize: imageWidth / 4,
   $largeContainerSize: imageWidth,
+  
   $largeImageSize: imageWidth / 2,
   container: {
     alignItems: 'center',
+    // backgroundColor: 'red',
+    marginBottom: 10
   },
   containerImage: {
     alignItems: 'center',

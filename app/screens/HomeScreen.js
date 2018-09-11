@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, StatusBar, KeyboardAvoidingView } from 'react-native';
+import { FlatList, StatusBar, View, KeyboardAvoidingView } from 'react-native';
 //
 import Container from '../components/Container';
 import BloodPressureInput from '../components/BloodPressureInput';
@@ -17,18 +17,32 @@ class HomeScreen extends Component {
   }
 
   getHandler = key => val => {
-    this.setState({ [key]: val })
+    this.setState({ [key]: val }, () => {
+      this.validateForm();
+    });
   }
 
-  handleLowPressureChange = this.getHandler('lowPressure')
-  handleHighPressureChange = this.getHandler('highPressure')
-
   handleSubmit = () => {
+    this.state.records.push({
+      dateTime: new Date(),
+      lowPressure: this.state.lowPressure,
+      highPressure: this.state.highPressure,
+    });
+
+    this.setState({
+      lowPressure: '',
+      highPressure: '',
+      isFormValid: false
+    })
+
+    console.log(this.state);
   };
 
   validateForm = () => {
+    console.log("lowPressure", this.state.lowPressure, +this.state.lowPressure >= 0);
+    console.log("highPressure", this.state.highPressure, +this.state.highPressure >= 0);
     if (
-      +this.state.lowPressure >= 0 && +this.state.highPressure >= 0
+      +this.state.lowPressure > 0 && +this.state.highPressure > 0
     ) {
       this.setState({ isFormValid: true })
     }
@@ -42,30 +56,32 @@ class HomeScreen extends Component {
       <Container>
         <StatusBar translucent={false} barStyle="default" />
         <Header onPress={this.handleOptionsPress} />
-        <KeyboardAvoidingView behavior="padding">
-          <Logo />
-          <BloodPressureInput
-            label='低压'
-            keyboardType="numeric"
-            name="lowPressure"
-            onChangeText={this.getHandler('phone')}
-          />
-          <BloodPressureInput
-            label='高压'
-            keyboardType="numeric"
-            name="highPressure"
-            onChangeText={this.getHandler('name')}
-          />
-          <SubmitButton onPress={this.handleSubmit} text="保存" />
-        </KeyboardAvoidingView>
-        <FlatList
-          data={this.state.records}
-          renderItem={({ record }) => (
-            <ListItem data={record} />
-          )}
-          keyExtractor={item => item}
-          ItemSeparatorComponent={Separator}
+        <Logo />
+        <BloodPressureInput
+          label='低压'
+          keyboardType="numeric"
+          name="lowPressure"
+          value={this.state.lowPressure}
+          onChangeText={this.getHandler('lowPressure')}
         />
+        <BloodPressureInput
+          label='高压'
+          keyboardType="numeric"
+          name="highPressure"
+          value={this.state.highPressure}
+          onChangeText={this.getHandler('highPressure')}
+        />
+        <SubmitButton enabled={this.state.isFormValid} onPress={this.handleSubmit} text="保存" />
+        <View style={{ height: 100, alignSelf: "flex-end" }}>
+          <FlatList
+            data={this.state.records}
+            renderItem={({ record }) => (
+              <ListItem data={record} />
+            )}
+            keyExtractor={item => item}
+            ItemSeparatorComponent={Separator}
+          />
+        </View>
       </Container>
     );
   }
