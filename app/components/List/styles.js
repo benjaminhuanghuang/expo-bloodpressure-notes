@@ -6,20 +6,37 @@ export default EStyleSheet.create({
   row: {
     paddingHorizontal: 20,
     paddingVertical: 16,
-    justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '$white',
   },
-  text: {
+  header: {
+    marginTop: 5,
+    width: '90%',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '$white',
+    borderBottomColor: '$border',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+  },
+  cell: {
     color: '$darkText',
     fontSize: 16,
+    flex: 3,
+  },
+  cellDateTime: {
+    color: '$darkText',
+    fontSize: 16,
+    flex: 4,
   },
   separator: {
     backgroundColor: '$border',
     height: StyleSheet.hairlineWidth,
     flex: 1,
-    marginLeft: 20,
   },
   icon: {
     backgroundColor: 'transparent',

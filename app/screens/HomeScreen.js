@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
-import { FlatList, StatusBar, ListView, ScrollView, View, KeyboardAvoidingView } from 'react-native';
+import { FlatList, StatusBar, View, KeyboardAvoidingView } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+//
+import moment from 'moment';
 //
 import Container from '../components/Container';
 import BloodPressureInput from '../components/BloodPressureInput';
 import { Header } from '../components/Header';
 import { Logo } from '../components/Logo';
 import SubmitButton from '../components/SubmitButton';
-import { ListItem, Separator, ListViewHeader, ListViewRow } from '../components/List';
+import { ListItem, Separator, ListHeader } from '../components/List';
+
+const styles = EStyleSheet.create({
+  list: {
+    width: '90%',
+    backgroundColor: '$white',
+    marginBottom: 5,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+  },
+})
 
 class HomeScreen extends Component {
   state = {
@@ -21,7 +34,7 @@ class HomeScreen extends Component {
       {
         lowPressure: 70,
         highPressure: 150,
-        dateTime: '11111'
+        dateTime: '22222'
       }
     ],
     isFormValid: false,
@@ -34,19 +47,17 @@ class HomeScreen extends Component {
   }
 
   handleSubmit = () => {
-    this.state.records.push({
-      dateTime: new Date(),
-      lowPressure: this.state.lowPressure,
-      highPressure: this.state.highPressure,
-    });
-
     this.setState({
       lowPressure: '',
       highPressure: '',
-      isFormValid: false
-    })
-
-    console.log(this.state);
+      isFormValid: false,
+      records: [
+        {
+          dateTime: moment().format('h:mm:ss'),
+          lowPressure: this.state.lowPressure,
+          highPressure: this.state.highPressure,
+        }, ...this.state.records]
+    });
   };
 
   validateForm = () => {
@@ -81,12 +92,12 @@ class HomeScreen extends Component {
           onChangeText={this.getHandler('highPressure')}
         />
         <SubmitButton enabled={this.state.isFormValid} onPress={this.handleSubmit} text="保存" />
-
-        <ListView
-          dataSource={this.state.records}
-          renderRow={(data) => <ListViewRow data={data} />}
-          renderSeparator={Separator}
-          renderHeader={<ListViewHeader headers={['时间', '低压', '高压' ]}/>}
+        <ListHeader />
+        <FlatList style={styles.list}
+          data={this.state.records}
+          renderItem={({ item }) => <ListItem data={item} />}
+          ItemSeparatorComponent={Separator}
+          keyExtractor={item => item.dateTime}
         />
       </Container>
     );

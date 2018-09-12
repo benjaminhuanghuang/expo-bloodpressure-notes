@@ -4,13 +4,12 @@ import { View, Text, TouchableHighlight } from 'react-native';
 
 import styles from './styles';
 
-const ListItem = ({record}) => {
-  console.log(record);
-   return (
-    <View style={styles.row} key={record.dateTime}>
-      <Text style={styles.text}>{record.lowPressure}</Text>
-      <Text style={styles.text}>{record.highPressure}</Text>
-      {/* <Text style={styles.text}>{record.dateTime}</Text> */}
+const ListItem = ({data}) => {
+  return (
+    <View style={styles.row} key={data.dateTime}>
+      <Text style={styles.cellDateTime}>{data.dateTime}</Text>
+      <Text style={styles.cell}>{data.lowPressure}</Text>
+      <Text style={styles.cell}>{data.highPressure}</Text>
     </View>
   );
 }
