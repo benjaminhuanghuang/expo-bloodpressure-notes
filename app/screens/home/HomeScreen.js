@@ -4,12 +4,12 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 //
 import moment from 'moment';
 //
-import Container from '../components/Container';
-import BloodPressureInput from '../components/BloodPressureInput';
-import { Header } from '../components/Header';
-import { Logo } from '../components/Logo';
-import SubmitButton from '../components/SubmitButton';
-import { ListItem, Separator, ListHeader } from '../components/List';
+import Container from '../../components/Container';
+import BloodPressureInput from '../../components/BloodPressureInput';
+import { Header } from '../../components/Header';
+import { Logo } from '../../components/Logo';
+import SubmitButton from '../../components/SubmitButton';
+import { ListItem, Separator, ListHeader } from '../../components/List';
 
 const styles = EStyleSheet.create({
   list: {

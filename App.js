@@ -2,7 +2,7 @@ import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 //
 import AppNavigator from './app/routes/AppNavigator';
-import MainNavigator from './routes/MainNavigator';
+import MainNavigator from './app/routes/MainNavigator';
 
 EStyleSheet.build({
   $primaryBlue: '#4F6D7A',

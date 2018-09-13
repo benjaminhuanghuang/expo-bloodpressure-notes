@@ -6,25 +6,12 @@ import {
 } from "react-navigation";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
-import EStyleSheet from 'react-native-extended-stylesheet';
 
-EStyleSheet.build({
-  $primaryBlue: '#4F6D7A',
-  $primaryOrange: '#D57A66',
-  $primaryGreen: '#00BD9D',
-  $primaryPurple: '#9E768F',
-
-  $white: '#FFFFFF',
-  $lightGray: '#F0F0F0', 
-  $border: '#979797',
-  $inputText: '#797979',
-  $darkText: '#343434',
-});
 
 //
-import HomeScreen from "./screens/HomeScreen";
-import HistoryScreen from "./screens/HistoryScreen";
-import ChartScreen from "./screens/ChartScreen";
+import HomeScreen from "./screens/home/HomeScreen";
+import HistoryScreen from "./screens/history/HistoryListScreen";
+import ChartScreen from "./screens/history/HistoryChartScreen";
 
 const AppNavigator = createBottomTabNavigator({
     Home: HomeScreen,
