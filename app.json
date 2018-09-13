@@ -5,6 +5,12 @@
     "sdkVersion": "27.0.0",
     "orientation": "portrait",
     "privacy": "public",
-    "slug": "pirate"
+    "slug": "pirate",
+    "ios": {
+      "bundleIdentifier": "benjaminhuanghuang"
+    },
+    "android": {
+      "package": "benjaminhuanghuang"
+    }
   }
 }

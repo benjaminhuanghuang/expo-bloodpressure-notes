@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { ScrollView, StatusBar,Text } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-class ChartScreen extends Component {
+
+
+class HistoryListScreen extends Component {
+
+
   render() {
     return (
       <ScrollView>
@@ -12,4 +16,4 @@ class ChartScreen extends Component {
     );
   }
 }
-export default ChartScreen;
+export default HistoryListScreen;
