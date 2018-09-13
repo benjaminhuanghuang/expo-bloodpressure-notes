@@ -1,5 +1,7 @@
 {
   "expo": {
+    "name": "血压笔记",
+    "version": "0.0.1",
     "sdkVersion": "27.0.0"
   }
 }
