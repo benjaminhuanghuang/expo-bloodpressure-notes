@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'react-native';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -21,9 +21,9 @@ const styles = EStyleSheet.create({
 });
 
 const Container = ({ children }) => (
-  <View style={styles.container}>
+  <SafeAreaView style={styles.container}>
     {children}
-  </View>
+  </SafeAreaView>
 );
 
 Container.propTypes = {
