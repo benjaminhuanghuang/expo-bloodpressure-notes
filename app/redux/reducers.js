@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { reducer as form } from 'redux-form';
 
 import {
   HomeReducer,
@@ -10,7 +9,6 @@ import navigation from '../routes/navigationReducer';
 
 export default combineReducers({
   home: HomeReducer,
-  navigation,
   user: UserReducer,
-  form,
+  navigation,
 });
