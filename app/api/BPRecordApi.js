@@ -5,13 +5,12 @@ axios.defaults.baseURL = url;
 
 class BPRecordApi {
   constructor() {
-    this.groupId = fakeGroupId;
     this.path = `/api/bprecords`;
   }
 
-  async fetchTodayRecords() {
+  async fetchTodayRecords(args) {
     try {
-      const { data } = await axios.get(this.path);
+      const { data } = await axios.post(this.path, { ...args });
       return data.meetups;
     } catch (e) {
       throw e;

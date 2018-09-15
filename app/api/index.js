@@ -1,7 +1,7 @@
-import RecordApi from './BPRecordApi';
+import BPRecordApi from './BPRecordApi';
 import UserApi from './UserApi';
 
 export {
-  RecordApi,
+  BPRecordApi,
   UserApi,
 };
