@@ -5,10 +5,10 @@ import {
   UserReducer,
 } from '../screens';
 
-import navigation from '../routes/navigationReducer';
+// import navigation from '../routes/navigationReducer';
 
 export default combineReducers({
   home: HomeReducer,
   user: UserReducer,
-  navigation,
+  // navigation,
 });

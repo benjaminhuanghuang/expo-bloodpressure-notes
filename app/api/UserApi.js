@@ -1,5 +1,5 @@
 import axios from 'axios';
-import url from 'Url';
+import url from './Url';
 
 axios.defaults.baseURL = url;
 
