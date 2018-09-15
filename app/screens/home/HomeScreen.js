@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { FlatList, StatusBar, View, KeyboardAvoidingView } from 'react-native';
+import { FlatList, StatusBar, Text, View, KeyboardAvoidingView } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { connect } from 'react-redux';
 //
 import moment from 'moment';
 //
@@ -10,6 +11,8 @@ import { Header } from '../../components/Header';
 import { Logo } from '../../components/Logo';
 import SubmitButton from '../../components/SubmitButton';
 import { ListItem, Separator, ListHeader } from '../../components/List';
+
+import { createRecord } from './actions';
 
 const styles = EStyleSheet.create({
   list: {
@@ -21,22 +24,18 @@ const styles = EStyleSheet.create({
   },
 })
 
+@connect(
+  state => ({
+    todayRecords: state.home.todayRecords,
+    error: state.home.error,
+    isLoding: state.home.isLoding,
+  }),
+  { createRecord, }
+)
 class HomeScreen extends Component {
   state = {
     lowPressure: '',
     highPressure: '',
-    records: [
-      {
-        lowPressure: 60,
-        highPressure: 120,
-        dateTime: '11111'
-      },
-      {
-        lowPressure: 70,
-        highPressure: 150,
-        dateTime: '22222'
-      }
-    ],
     isFormValid: false,
   }
 
@@ -47,16 +46,15 @@ class HomeScreen extends Component {
   }
 
   handleSubmit = () => {
+    this.props.createRecord({
+      lowPressure: this.state.lowPressure,
+      highPressure: this.state.highPressure
+    });
+
     this.setState({
       lowPressure: '',
       highPressure: '',
       isFormValid: false,
-      records: [
-        {
-          dateTime: moment().format('h:mm:ss'),
-          lowPressure: this.state.lowPressure,
-          highPressure: this.state.highPressure,
-        }, ...this.state.records]
     });
   };
 
@@ -72,6 +70,22 @@ class HomeScreen extends Component {
   }
 
   render() {
+    const {
+      isLoading,
+      todayRecords,
+      error,
+    } = this.props;
+
+    if (isLoading) {
+      return <LoadingScreen />;
+    } else if (error.on) {
+      return (
+        <Container>
+          <Text>{error.message}</Text>
+        </Container>
+      );
+    }
+
     return (
       <Container>
         <StatusBar translucent={false} barStyle="default" />
@@ -94,7 +108,7 @@ class HomeScreen extends Component {
         <SubmitButton enabled={this.state.isFormValid} onPress={this.handleSubmit} text="保存" />
         <ListHeader />
         <FlatList style={styles.list}
-          data={this.state.records}
+          data={todayRecords}
           renderItem={({ item }) => <ListItem data={item} />}
           ItemSeparatorComponent={Separator}
           keyExtractor={item => item.dateTime}
