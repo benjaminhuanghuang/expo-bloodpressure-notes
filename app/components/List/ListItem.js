@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
+import moment from 'moment';
 
 import styles from './styles';
 
 const ListItem = ({data}) => {
   return (
-    <View style={styles.row} key={data.dateTime}>
-      <Text style={styles.cellDateTime}>{data.dateTime}</Text>
+    <View style={styles.row} key={data._id}>
+      <Text style={styles.cellDateTime}>{moment(data.createdAt).format("YY-MM-D dddd")}</Text>
       <Text style={styles.cell}>{data.lowPressure}</Text>
       <Text style={styles.cell}>{data.highPressure}</Text>
     </View>

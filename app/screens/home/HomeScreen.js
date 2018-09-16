@@ -3,8 +3,6 @@ import { FlatList, StatusBar, Text, View, KeyboardAvoidingView } from 'react-nat
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { connect } from 'react-redux';
 //
-import moment from 'moment';
-//
 import Container from '../../components/Container';
 import BloodPressureInput from '../../components/BloodPressureInput';
 import { Header } from '../../components/Header';
@@ -12,7 +10,7 @@ import { Logo } from '../../components/Logo';
 import SubmitButton from '../../components/SubmitButton';
 import { ListItem, Separator, ListHeader } from '../../components/List';
 
-import { createRecord } from './actions';
+import { createRecord, fetchTodayRecords } from './actions';
 
 const styles = EStyleSheet.create({
   list: {
@@ -30,7 +28,7 @@ const styles = EStyleSheet.create({
     error: state.home.error,
     isLoding: state.home.isLoding,
   }),
-  { createRecord, }
+  { createRecord, fetchTodayRecords}
 )
 class HomeScreen extends Component {
   state = {
@@ -67,6 +65,11 @@ class HomeScreen extends Component {
     else {
       this.setState({ isFormValid: false })
     }
+  }
+
+  componentDidMount()
+  {
+    this.props.fetchTodayRecords();
   }
 
   render() {
@@ -111,7 +114,7 @@ class HomeScreen extends Component {
           data={todayRecords}
           renderItem={({ item }) => <ListItem data={item} />}
           ItemSeparatorComponent={Separator}
-          keyExtractor={item => item.dateTime}
+          keyExtractor={item => item._id}
         />
       </Container>
     );

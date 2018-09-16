@@ -5,22 +5,22 @@ axios.defaults.baseURL = url;
 
 class BPRecordApi {
   constructor() {
-    this.path = `/api/bprecords`;
+    this.path = `/bprecords`;
   }
 
   async fetchTodayRecords(args) {
     try {
       const { data } = await axios.post(this.path, { ...args });
-      return data.meetups;
+      return data.bpRecords;
     } catch (e) {
       throw e;
     }
   }
 
-  async createRecords(args) {
+  async createRecord(args) {
     try {
-      const res = await axios.post(`${this.path}/new`, { ...args });
-      return res;
+      const { data }  = await axios.post(`${this.path}/new`, { ...args });
+      return data.bpRecord;
     } catch (e) {
       throw e;
     }

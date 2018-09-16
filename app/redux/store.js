@@ -13,7 +13,7 @@ const middlewares = [
 ];
 
 if (__DEV__) { // eslint-disable-line
-  middlewares.push(createLogger());
+  //middlewares.push(createLogger());
 }
 
 const persistConfig = {

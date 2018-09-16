@@ -43,7 +43,7 @@ export default (state = INITIAL_STATE, action) => {
       };;
     case FETCH_TODAY_RECORDS_SUCCESS:
       return {
-        data: action.payload,
+        todayRecords: action.payload,
         isLoading: false,
         error: {
           on: false,
@@ -52,11 +52,11 @@ export default (state = INITIAL_STATE, action) => {
       };
     case FETCH_TODAY_RECORDS_ERROR:
       return {
-        data: [],
+        todayRecords: [],
         isLoading: false,
         error: {
           on: true,
-          message: 'Error when fetching my meetups',
+          message: 'Error when fetching today records',
         },
       };
     default:
