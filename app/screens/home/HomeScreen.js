@@ -27,6 +27,7 @@ const styles = EStyleSheet.create({
     todayRecords: state.home.todayRecords,
     error: state.home.error,
     isLoding: state.home.isLoding,
+    userId: state.user.info.id
   }),
   { createRecord, fetchTodayRecords}
 )
@@ -46,7 +47,8 @@ class HomeScreen extends Component {
   handleSubmit = () => {
     this.props.createRecord({
       lowPressure: this.state.lowPressure,
-      highPressure: this.state.highPressure
+      highPressure: this.state.highPressure,
+      userId: this.props.userId
     });
 
     this.setState({

@@ -20,11 +20,11 @@ export const createRecord = args => async dispatch => {
   } catch (e) {
     return dispatch({ type: CREATE_RECORD_ERROR, payload: e.message });
   }
-  return await dispatch(fetchTodayRecords());
+  return await dispatch(fetchTodayRecords(args.userId));
 };
 
 
-export const fetchTodayRecords = () => async dispatch => {
+export const fetchTodayRecords = (userId) => async dispatch => {
   dispatch({ type: FETCH_TODAY_RECORDS });
   const startUTC = moment().startOf('day').utc().format();
   const endUTC = moment().endOf('day').utc().format();
@@ -32,6 +32,7 @@ export const fetchTodayRecords = () => async dispatch => {
     const records = await recordApi.fetchTodayRecords({
       startUTC,
       endUTC,
+      userId, 
     });
     dispatch({ type: FETCH_TODAY_RECORDS_SUCCESS, payload: records });
   } catch (e) {
