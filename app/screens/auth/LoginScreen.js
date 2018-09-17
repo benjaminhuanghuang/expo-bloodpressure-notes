@@ -7,7 +7,9 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 import { login } from './actions';
 
-import { LoadingScreen } from '../../components/LoadingScreen';
+import LoadingScreen from '../../components/LoadingScreen';
+import Container from '../../components/Container';
+import { Logo } from '../../components/Logo';
 
 import fbConfig from '../../constants/fbConfig';
 import googleConfig from '../../constants/googleConfig';
@@ -19,8 +21,9 @@ const FlexContainer = styled.View`
   alignSelf: stretch;
 `;
 
-const MeetupText = styled.Text`
-  fontSize: 18;
+const CaptionText = styled.Text`
+  fontSize: 28;
+  color: ${({ color }) => color};
 `;
 
 const BottomButtonWrapper = styled.View`
@@ -35,6 +38,11 @@ const Button = styled.TouchableOpacity`
   backgroundColor: ${({ color }) => color};
   flexDirection: row;
   paddingHorizontal: 10; 
+`;
+
+const ButtonText = styled.Text`
+  color: ${({ color }) => color};
+  fontSize: 20;
 `;
 
 @connect(
@@ -77,7 +85,6 @@ export default class LoginScreen extends Component {
         iosClientId: googleConfig.CLIENT_ID_IOS,
         scopes: ['profile', 'email'],
       });
-
       if (result.type === 'success') {
         // Test
         // Alert.alert('Logged In with google', `Hi ${result.accessToken}`);
@@ -92,29 +99,29 @@ export default class LoginScreen extends Component {
 
   render() {
     if (this.props.isLoading) {
-      return <LoadingScreen color={Colors.$redColor} />;
+      return <LoadingScreen color={'#3b5998'}/>;
     }
     return (
-      <FlexContainer>
+      <Container>
         <FlexContainer>
-          <Text>血压笔记</Text>
+          <Logo />
         </FlexContainer>
         <FlexContainer>
           <FlexContainer>
-            <Text>请登录</Text>
+            <CaptionText color='#fff'>请登录</CaptionText>
           </FlexContainer>
           <BottomButtonWrapper>
             <Button color='#db3236' onPress={() => this._onLoginPress('google')}>
-              <Text>Connect with</Text>
+              <ButtonText color='#fff'>Connect with</ButtonText>
               <MaterialCommunityIcons name="google" size={30} color="#fff" />
             </Button>
             <Button color='#3b5998' onPress={() => this._onLoginPress('facebook')}>
-              <Text>Connect with</Text>
+              <ButtonText color='#fff' >Connect with</ButtonText>
               <MaterialCommunityIcons name="facebook" size={30} color="#fff" />
             </Button>
           </BottomButtonWrapper>
         </FlexContainer>
-      </FlexContainer>
+      </Container>
     );
   }
 }

@@ -1,3 +1,3 @@
 export default {
-  CLIENT_ID_IOS: '548231948559-10h93j23vksbov3qol3ln0s372asu4s9.apps.googleusercontent.com',
+  CLIENT_ID_IOS: '1043275812828-21ljdilvcobtb3eurbmfccbill94iuc9.apps.googleusercontent.com',
 };
