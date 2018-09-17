@@ -1,4 +1,4 @@
-import { User } from '../../constants/api';
+import { UserApi } from '../../api';
 
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -24,7 +24,7 @@ export function login(token, provider) {
   return async (dispatch) => {
     dispatch({ type: LOGIN });
     try {
-      const data = await User.login({ token, provider });
+      const data = await UserApi.login({ token, provider });
       return dispatch(loginSuccess(data));
     } catch (e) {
       return dispatch(loginError(e));

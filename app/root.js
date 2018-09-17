@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import Navigator from './routes/MainNavigator';
+import Navigator from './routes/AppNavigator';
 import { AlertProvider } from './components/Alert';
 import store from './redux/store';
 
