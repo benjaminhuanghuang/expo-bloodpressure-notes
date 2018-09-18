@@ -29,7 +29,7 @@ export const fetchTodayRecords = (userId) => async dispatch => {
   const startUTC = moment().startOf('day').utc().format();
   const endUTC = moment().endOf('day').utc().format();
   try {
-    const records = await recordApi.fetchTodayRecords({
+    const records = await recordApi.fetchRecords({
       startUTC,
       endUTC,
       userId, 

@@ -8,7 +8,7 @@ class BPRecordApi {
     this.path = `/bprecords`;
   }
 
-  async fetchTodayRecords(args) {
+  async fetchRecords(args) {
     try {
       const { data } = await axios.post(this.path, { ...args });
       return data.bpRecords;
