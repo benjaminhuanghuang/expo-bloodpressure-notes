@@ -71,7 +71,7 @@ class HomeScreen extends Component {
 
   componentDidMount()
   {
-    this.props.fetchTodayRecords();
+    this.props.fetchTodayRecords(this.props.userId);
   }
 
   render() {
