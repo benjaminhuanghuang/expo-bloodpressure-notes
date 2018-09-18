@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { AsyncStorage } from 'react-native';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer } from 'redux-persist'
 import { createLogger } from 'redux-logger';
 
 import reducers from './reducers';
@@ -18,13 +18,15 @@ if (__DEV__) { // eslint-disable-line
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-export default createStore(
+export const store = createStore(
   persistedReducer,
   undefined, // init state
   compose(applyMiddleware(...middlewares)),
 );
+
+export const persistor = persistStore(store);
