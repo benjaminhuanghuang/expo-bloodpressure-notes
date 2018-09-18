@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, FlatList, Picker } from 'react-native';
-import { NavigationEvents } from "react-navigation";
+import {View, StatusBar, FlatList, Picker } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -12,12 +11,19 @@ import { ListItem, Separator, ListHeader } from '../../components/List';
 
 const styles = EStyleSheet.create({
   list: {
-    width: '90%',
-    height: 50,
+    width: '90%',    
+    height: 200,
     backgroundColor: '$white',
     marginBottom: 5,
     borderBottomLeftRadius: 4,
     borderBottomRightRadius: 4,
+  },
+  flexContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    height: 20,
   },
 })
 
@@ -64,19 +70,16 @@ class HistoryListScreen extends Component {
 
     return (
       <Container>
-        {/* <NavigationEvents onWillFocus={payload => {
-            this.fetchData();
-          }}
-        /> */}
-        <StatusBar translucent={false} barStyle="default" />
-        <Picker
-          selectedValue={this.state.language}
-          style={{ height: 50, width: 100 }}
-          onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-          <Picker.Item label="1 Week" value="week" />
-          <Picker.Item label="1 Month" value="month" />
-          <Picker.Item label="3 Month" value="month3" />
-        </Picker>
+        <View style={styles.flexContainer}>
+          <Picker
+            selectedValue={this.state.language}
+            style={{ height: 50, width: 100 }}
+            onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
+            <Picker.Item label="1 Week" value="week" />
+            <Picker.Item label="1 Month" value="month" />
+            <Picker.Item label="3 Month" value="month3" />
+          </Picker>
+        </View>
         <ListHeader />
         <FlatList style={styles.list}
           data={bpRecords}
