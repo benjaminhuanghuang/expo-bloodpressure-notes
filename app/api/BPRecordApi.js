@@ -17,6 +17,15 @@ class BPRecordApi {
     }
   }
 
+  async fetchChartData(args) {
+    try {
+      const { data } = await axios.post(this.path, { ...args });
+      return data.bpRecords;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async createRecord(args) {
     try {
       const { data }  = await axios.post(`${this.path}/new`, { ...args });

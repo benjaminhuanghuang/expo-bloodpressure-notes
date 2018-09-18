@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StatusBar, FlatList, Picker } from 'react-native';
+import { NavigationEvents } from "react-navigation";
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -12,6 +13,7 @@ import { ListItem, Separator, ListHeader } from '../../components/List';
 const styles = EStyleSheet.create({
   list: {
     width: '90%',
+    height: 50,
     backgroundColor: '$white',
     marginBottom: 5,
     borderBottomLeftRadius: 4,
@@ -34,7 +36,9 @@ class HistoryListScreen extends Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    this.props.navigation.addListener('willFocus', (route) => {
+      this.fetchData();
+    });
   }
 
   fetchData() {
@@ -46,7 +50,7 @@ class HistoryListScreen extends Component {
     }
 
     const endUTC = moment().endOf('day').utc().format();
-    
+
     this.props.fetchRecords(startUTC, endUTC, this.props.userId);
   }
 
@@ -60,6 +64,10 @@ class HistoryListScreen extends Component {
 
     return (
       <Container>
+        {/* <NavigationEvents onWillFocus={payload => {
+            this.fetchData();
+          }}
+        /> */}
         <StatusBar translucent={false} barStyle="default" />
         <Picker
           selectedValue={this.state.language}
@@ -76,7 +84,6 @@ class HistoryListScreen extends Component {
           ItemSeparatorComponent={Separator}
           keyExtractor={item => item._id}
         />
-
       </Container>
     );
   }
