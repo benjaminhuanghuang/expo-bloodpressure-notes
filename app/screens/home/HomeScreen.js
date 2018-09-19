@@ -114,7 +114,7 @@ class HomeScreen extends Component {
         <ListHeader />
         <FlatList style={styles.list}
           data={todayRecords}
-          renderItem={({ item }) => <ListItem data={item} />}
+          renderItem={({ item }) => <ListItem data={item} dateFormat={'ddd HH:mm'} />}
           ItemSeparatorComponent={Separator}
           keyExtractor={item => item._id}
         />

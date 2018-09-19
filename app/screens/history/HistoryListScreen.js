@@ -83,7 +83,7 @@ class HistoryListScreen extends Component {
         <ListHeader />
         <FlatList style={styles.list}
           data={bpRecords}
-          renderItem={({ item }) => <ListItem data={item} />}
+          renderItem={({ item }) => <ListItem data={item} dateFormat={'MM-DD HH:mm'}/>}
           ItemSeparatorComponent={Separator}
           keyExtractor={item => item._id}
         />
