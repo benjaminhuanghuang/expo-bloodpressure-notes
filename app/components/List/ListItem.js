@@ -8,7 +8,7 @@ import styles from './styles';
 const ListItem = ({data, dateFormat}) => {
   return (
     <View style={styles.row} key={data._id}>
-      <Text style={styles.cellDateTime}>{moment(data.createdAt).format({dateFormat})}</Text>
+      <Text style={styles.cellDateTime}>{moment(data.createdAt).format(dateFormat)}</Text>
       <Text style={styles.cell}>{data.lowPressure}</Text>
       <Text style={styles.cell}>{data.highPressure}</Text>
     </View>
