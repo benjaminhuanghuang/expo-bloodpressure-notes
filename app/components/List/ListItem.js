@@ -8,7 +8,7 @@ import styles from './styles';
 const ListItem = ({data, dateFormat}) => {
   return (
     <View style={styles.row} key={data._id}>
-      <Text style={styles.cellDateTime}>{moment(data.createdAt).format(dateFormat)}</Text>
+      <Text style={styles.cellDateTime}>{moment(data.createdTime).format(dateFormat)}</Text>
       <Text style={styles.cell}>{data.lowPressure}</Text>
       <Text style={styles.cell}>{data.highPressure}</Text>
     </View>
@@ -16,13 +16,8 @@ const ListItem = ({data, dateFormat}) => {
 }
 
 ListItem.propTypes = {
-  text: PropTypes.string,
-  onPress: PropTypes.func,
-  checkmark: PropTypes.bool,
-  selected: PropTypes.bool,
-  visible: PropTypes.bool,
-  customIcon: PropTypes.element,
-  iconBackground: PropTypes.string,
+  data: PropTypes.any,
+  dateFormat: PropTypes.string,
 };
 
 export default ListItem;

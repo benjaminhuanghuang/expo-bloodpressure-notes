@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { FlatList, StatusBar, Text, View, KeyboardAvoidingView } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { connect } from 'react-redux';
+import { Button } from 'react-native-elements';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 //
 import Container from '../../components/Container';
 import BloodPressureInput from '../../components/BloodPressureInput';
@@ -11,6 +13,7 @@ import SubmitButton from '../../components/SubmitButton';
 import { ListItem, Separator, ListHeader } from '../../components/List';
 
 import { createRecord, fetchTodayRecords } from './actions';
+import moment from 'moment';
 
 const styles = EStyleSheet.create({
   list: {
@@ -19,6 +22,13 @@ const styles = EStyleSheet.create({
     marginBottom: 5,
     borderBottomLeftRadius: 4,
     borderBottomRightRadius: 4,
+  },
+  setTimeButton: {
+    width:400,
+    marginTop:5,
+    flexDirection: 'row',
+    justifyContent: 'center', 
+    borderRadius: 5,
   },
 })
 
@@ -29,13 +39,15 @@ const styles = EStyleSheet.create({
     isLoding: state.home.isLoding,
     userId: state.user.info.id
   }),
-  { createRecord, fetchTodayRecords}
+  { createRecord, fetchTodayRecords }
 )
 class HomeScreen extends Component {
   state = {
     lowPressure: '',
     highPressure: '',
+    createdTime: null,
     isFormValid: false,
+    isDTPickerVisible: false
   }
 
   getHandler = key => val => {
@@ -48,12 +60,14 @@ class HomeScreen extends Component {
     this.props.createRecord({
       lowPressure: this.state.lowPressure,
       highPressure: this.state.highPressure,
+      createdTime: moment(this.state.createdTime).utc(),
       userId: this.props.userId
     });
 
     this.setState({
       lowPressure: '',
       highPressure: '',
+      createdTime: null,
       isFormValid: false,
     });
   };
@@ -69,9 +83,26 @@ class HomeScreen extends Component {
     }
   }
 
-  componentDidMount()
-  {
+  componentDidMount() {
     this.props.fetchTodayRecords(this.props.userId);
+  }
+
+  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true })
+
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
+
+  _handleDatePicked = date => {
+    this.setState({ createdTime: date });
+    this._hideDateTimePicker();
+  }
+  
+  // generate button caption
+  _getButtionTitle() {
+    const { createdTime } = this.state;
+    if (createdTime) {
+      return moment(createdTime).format('YYYY-MM-DD, hh:mm:ss a');
+    }
+    return '选择时间';
   }
 
   render() {
@@ -109,6 +140,17 @@ class HomeScreen extends Component {
           name="highPressure"
           value={this.state.highPressure}
           onChangeText={this.getHandler('highPressure')}
+        />
+        <Button style={styles.setTimeButton}
+          raised
+          onPress={()=>this._showDateTimePicker()}
+          title={this._getButtionTitle()}
+        />
+        <DateTimePicker
+          isVisible={this.state.isDateTimePickerVisible}
+          onConfirm={this._handleDatePicked}
+          onCancel={this._hideDateTimePicker}
+          mode="datetime"
         />
         <SubmitButton enabled={this.state.isFormValid} onPress={this.handleSubmit} text="保存" />
         <ListHeader />

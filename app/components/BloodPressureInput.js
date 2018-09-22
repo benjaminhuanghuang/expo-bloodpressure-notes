@@ -20,7 +20,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: BORDER_RADIUS,
-    marginVertical: 11,
+    marginVertical: 5,
   },
   containerDisabled: {
     backgroundColor: '$lightGray',
