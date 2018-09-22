@@ -24,7 +24,6 @@ const styles = EStyleSheet.create({
     borderBottomRightRadius: 4,
   },
   setTimeButton: {
-    width:400,
     marginTop:5,
     flexDirection: 'row',
     justifyContent: 'center', 
