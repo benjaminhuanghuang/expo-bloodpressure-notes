@@ -9,6 +9,7 @@ import {
 
 const INITIAL_STATE = {
   bpRecords: [],
+  bpChart:{},
   error: {
     on: false,
     message: null,
@@ -35,6 +36,29 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_RECORDS_ERROR:
       return {
         bpRecords: [],
+        isLoading: false,
+        error: {
+          on: true,
+          message: 'Error when fetching records',
+        },
+      };
+      case FETCH_CHART_DATA:
+      return {
+        ...INITIAL_STATE,
+        isLoading: true,
+      };;
+    case FETCH_CHART_DATA_SUCCESS:
+      return {
+        bpChart: action.payload,
+        isLoading: false,
+        error: {
+          on: false,
+          message: null,
+        },
+      };
+    case FETCH_CHART_DATA_SUCCESS:
+      return {
+        bpChart: [],
         isLoading: false,
         error: {
           on: true,
