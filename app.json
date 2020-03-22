@@ -1,16 +1,30 @@
 {
   "expo": {
     "name": "血压笔记",
-    "version": "0.0.1",
-    "sdkVersion": "27.0.0",
-    "orientation": "portrait",
+    "slug": "bloodpressure-notes",
     "privacy": "public",
-    "slug": "pirate",
-    "ios": {
-      "bundleIdentifier": "benjaminhuanghuang"
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
-    "android": {
-      "package": "cn.benjaminhuanghuang"
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
     }
   }
 }

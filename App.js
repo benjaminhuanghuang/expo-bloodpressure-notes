@@ -1,25 +1,38 @@
 import React from 'react';
-import EStyleSheet from 'react-native-extended-stylesheet';
-//
-import AppRoot from './app/root';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
-EStyleSheet.build({
-  $primaryBlue: '#4F6D7A',
-  $primaryOrange: '#D57A66',
-  $primaryGreen: '#00BD9D',
-  $primaryPurple: '#9E768F',
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-  $white: '#FFFFFF',
-  $lightGray: '#F0F0F0',
-  $border: '#979797',
-  $inputText: '#797979',
-  $darkText: '#343434',
-});
+import Navigator from './routes/AppNavigator';
+import { AlertProvider } from './components/Alert';
+import { store, persistor } from './redux/store';
 
-export default class App extends React.Component {
+
+// onNavigationStateChange={null}  will disable the log about navigation
+export default class AppRoot extends React.Component {
+  renderLoading = () => (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" />
+    </View>
+  );
   render() {
     return (
-      <AppRoot />
-    );
-  }
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={this.renderLoading()}>
+          <AlertProvider>
+            <Navigator onNavigationStateChange={null} />
+          </AlertProvider>
+        </PersistGate>
+      </Provider>)
+  };
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
