@@ -10,7 +10,7 @@ import { store, persistor } from './redux/store';
 
 
 // onNavigationStateChange={null}  will disable the log about navigation
-export default class AppRoot extends React.Component {
+export default class App extends React.Component {
   renderLoading = () => (
     <View style={styles.container}>
       <ActivityIndicator size="large" />
